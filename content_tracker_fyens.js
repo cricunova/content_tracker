@@ -67,6 +67,7 @@ var orangeBar = '<div id="orange-bar">' +
   '<p>Share: <span id="ln-orangebar-share">0</span></p>' +
   '</div>' +
   '<div id="orange-bar-google">' +
+  '<img src="http://i.imgsafe.org/3c91673.png" />' +
   '<p>PlusOnes: <span id="g-orangebar-plusone">0</span></p>' +
   '</div>' +
   '</div>';

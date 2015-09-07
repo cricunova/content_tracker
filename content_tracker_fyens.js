@@ -4,7 +4,7 @@
 // @version      0.1
 // @description  Client site content tracker demo.
 // @author       You
-// @match        http://www.fyens.dk/
+// @match        http://www.fyens.dk/*
 // @grant        none
 // ==/UserScript==
 var pageHeight = jQuery('body').height();

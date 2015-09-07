@@ -8,7 +8,7 @@
 
 jQuery.sharedCount = function(url, fn) {
     url = encodeURIComponent(url || location.href);
-    var domain = "free.sharedcount.com/";
+    var domain = "http://free.sharedcount.com/";
     var apikey = "aee20866ca3cc94ba8ab50758da938d2f241ee53";
     var arg = {
         data: {

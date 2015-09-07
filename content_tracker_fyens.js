@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         Content tracker
 // @namespace    http://www.fyens.dk/
-// @version      0.1
+// @version      1.0-beta1
 // @description  Client site content tracker demo.
-// @author       You
+// @author       Peytz
 // @match        http://www.fyens.dk/*
 // @grant        none
+// @require      https://raw.githubusercontent.com/cricunova/content_tracker/master/SharedCount.js
 // ==/UserScript==
 var pageHeight = jQuery('body').height();
 var pageWidth = jQuery('body').width();
@@ -13,7 +14,7 @@ var styles = '<style>' +
   '#orange-bar {width: 100px; height: ' + pageHeight + 'px; position: absolute; top: 0; left: 0; background-color: #ff9900; z-index: 9999999999; text-align: center;} ' +
   '#orange-bar-person {text-align: center; cursor: pointer; margin: 20px 10px 10px;} ' +
   '#orange-bar-group {text-align: center; cursor: pointer; margin: 10px; padding-bottom: 20px; border-bottom: 2px solid #ffffff;} ' +
-  '#orange-bar-watchers, #orange-bar-facebook, orange-bar-tweeter {text-align: center; margin: 10px; padding-bottom: 20px; border-bottom: 2px solid #ffffff;} ' +
+  '#orange-bar-watchers, #orange-bar-facebook, #orange-bar-tweeter, #orange-bar-linkedin {text-align: center; margin: 10px; padding-bottom: 20px; border-bottom: 2px solid #ffffff;} ' +
   '#orange-bar-back {text-align: center; cursor: pointer; margin: 20px 10px 10px;} ' +
   '#orange-bar p {color: white; font-weight: bold; padding: 5px 0;} ' +
   '#overview-tables-page-personal, #overview-tables-page-group {width: ' + (pageWidth-140) + 'px; height: ' + pageHeight + 'px; position: absolute; top: 0; left: 100px; z-index: 9999999999; background: white; padding: 20px;} ' +
@@ -53,17 +54,20 @@ var orangeBar = '<div id="orange-bar">' +
   '</div>' +
   '<div id="orange-bar-facebook">' +
   '<img src="http://i.imgsafe.org/1156fdc.png" />' +
-  '<p>Share: 20</p>' +
-  '<p>Like: 75</p>' +
-  '<p>Com.: 5</p>' +
+  '<p>Share: <span id="fb-orangebar-share">0</span></p>' +
+  '<p>Like: <span id="fb-orangebar-like">0</span></p>' +
+  '<p>Com.: <span id="fb-orangebar-comment">0</span></p>' +
   '</div>' +
   '<div id="orange-bar-tweeter">' +
   '<img src="http://i.imgsafe.org/0b9c7e3.png" />' +
-  '<p>Retweets: 25</p>' +
+  '<p>Retweets: <span id="tw-orangebar-tweets">0</span></p>' +
   '</div>' +
-  '<div id="orange-bar-linkedin" style="text-align: center; margin: 10px; padding-bottom: 20px; border-bottom: 2px solid #ffffff; ">' +
+  '<div id="orange-bar-linkedin">' +
   '<img src="http://i.imgsafe.org/0ef1a93.png" />' +
-  '<p>Share: 5</p>' +
+  '<p>Share: <span id="ln-orangebar-share">0</span></p>' +
+  '</div>' +
+  '<div id="orange-bar-google">' +
+  '<p>PlusOnes: <span id="g-orangebar-plusone">0</span></p>' +
   '</div>' +
   '</div>';
 var orangeBarPersonal = '<div id="orange-bar">' +
@@ -755,5 +759,13 @@ jQuery(document).on('click', '#orange-bar-back', function() {
         jQuery('#overview-tables-page-personal').remove();
     }
     jQuery('body').prepend(orangeBar);
+});
+jQuery.sharedCount(location.href, function(data){
+    jQuery("#fb-orangebar-share").text(data.Facebook.share_count);
+    jQuery("#fb-orangebar-like").text(data.Facebook.like_count);
+    jQuery("#fb-orangebar-comment").text(data.Facebook.comment_count);
+    jQuery("#tw-orangebar-tweets").text(data.Twitter);   
+    jQuery("#ln-orangebar-share").text(data.LinkedIn);
+    jQuery("#g-orangebar-plusone").text(data.GooglePlusOne);
 });
 
